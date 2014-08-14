@@ -93,6 +93,6 @@
             "description": "Specific arguments to pass to the Nagios plugin",
             "type": "string",
             "required": false
-        },
+        }
     ]
 }
