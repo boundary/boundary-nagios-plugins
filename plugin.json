@@ -9,7 +9,7 @@
                   "LOAD_5_MINUTE",
                   "LOAD_15_MINUTE"],
 
-    "paramArray" : { "itemTitle" : ["source"], "schemaTitle" : "Endpoint"},
+    "paramArray" : { "itemTitle" : ["source"], "schemaTitle" : "Check"},
     "paramSchema" : [
         {
             "title" : "Poll Time (sec)",
