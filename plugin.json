@@ -6,7 +6,7 @@
     "metrics" : [ "DISK_FREE_SPACE",
                   "SSH_RESPONSE_TIME",
                   "LOAD_1_MINUTE",
-                  "LOAD 5_MINUTE",
+                  "LOAD_5_MINUTE",
                   "LOAD_15_MINUTE"],
 
     "paramArray" : { "itemTitle" : ["source"], "schemaTitle" : "Endpoint"},
