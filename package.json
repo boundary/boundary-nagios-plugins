@@ -1,0 +1,26 @@
+{
+        "name": "boundary-nagios-plugins",
+        "version": "0.1.0",
+        "private": false,
+        "description": "Boundary nagios plugin for premimum that uses standard Nagios plugins for metrics",
+        "main": "index.js",
+        "devDependencies": {},
+        "repository": {
+        "type": "git",
+        "url": "https://github.com/boundary/boundary-nagios-plugins"
+        },
+        "keywords": [
+                "graphdat",
+                "plugin",
+                "http",
+                "response",
+                "poll"
+        ],
+        "author": "Graphdat <support@graphdat.com>",
+        "license": "Apache v2",
+        "bugs": {
+                "url": "https://github.com/boundary/boundary-nagios-plugins/issues"
+        },
+        "engine": "node >= 0.8.1"
+}
+
