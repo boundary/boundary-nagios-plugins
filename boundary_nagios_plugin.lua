@@ -2,7 +2,7 @@
 s = require("string")
 
 function getRandomValue(lower, upper)
-   return math.random(lower,upper*100)/100
+   return math.random(lower,upper)
 end
 
 function Main()
