@@ -11,9 +11,9 @@ local hostname = file:read('*all')
 hostname = s.gsub(hostname, "\n","")
 file:close()
 math.randomseed(os.time())
-print("LOAD_1_MINUTE",hostname,getRandomValue(0,20))
-print("LOAD_5_MINUTE",hostname,getRandomValue(0,20))
-print("LOAD_15_MINUTE",hostname,getRandomValue(0,20))
+print("LOAD_1_MINUTE",getRandomValue(0,20),hostname)
+print("LOAD_5_MINUTE",getRandomValue(0,20),hostname)
+print("LOAD_15_MINUTE",getRandomValue(0,20),hostname)
 
 end
 
