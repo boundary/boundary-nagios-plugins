@@ -5,10 +5,14 @@ function getRandomValue(lower, upper)
 end
 
 function Main()
+local file = assert(io.popen('hostname', 'r'))
+local hostname = file:read('*all')
+file:close()
+print(output)
 math.randomseed(os.time())
-print("LOAD_1_MINUTE",getRandomValue(0,20))
-print("LOAD_5_MINUTE",getRandomValue(0,20))
-print("LOAD_15_MINUTE",getRandomValue(0,20))
+print("LOAD_1_MINUTE",hostname,getRandomValue(0,20))
+print("LOAD_5_MINUTE",hostname,getRandomValue(0,20))
+print("LOAD_15_MINUTE",hostname,getRandomValue(0,20))
 
 end
 
