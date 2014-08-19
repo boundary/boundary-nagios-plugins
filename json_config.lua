@@ -1,6 +1,6 @@
 json = require('dkjson')
 
-function newCheckConfig(filePath)
+function newJsonConfig(filePath)
   local self = {path = filePath,content}
   
   local readFile = function()

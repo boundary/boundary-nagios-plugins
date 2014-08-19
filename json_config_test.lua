@@ -1,4 +1,4 @@
-require("check_config")
+require("json_config")
 
 -- Unit testing starts
 LuaUnit = require('luaunit')
@@ -9,7 +9,7 @@ function TestCheckConfig:setUp()
   self.a = 1
   self.b = 2
   self.file = "src/test/resources/example_config.json"
-  self.config = newCheckConfig(self.file)
+  self.config = newJsonConfig(self.file)
 end
 
 function TestCheckConfig:tearDown()
@@ -17,7 +17,7 @@ function TestCheckConfig:tearDown()
 end
 
 function TestCheckConfig:testGetFilePath()
-  c = newCheckConfig(self.file)
+  c = newJsonConfig(self.file)
   assertEquals(c.getPath(),self.file)
 end
 
