@@ -1,6 +1,6 @@
 {
     "description" : "Runs Nagios Plugins to fetch metrics from a host",
-    "command" : "lua boundary_nagios_plugin.lua",
+    "command" : "lua index.lua",
     "ignore" : "node_modules",
 
     "metrics" : [ "DISK_FREE_SPACE",
