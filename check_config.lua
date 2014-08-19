@@ -5,7 +5,6 @@ function newCheckConfig(filePath)
   
   local readFile = function()
     -- Load the json configuration into a string
-    print(self.path)
     local f = assert(io.open(self.path, "r"))
     local t = f:read("*a")
     f:close()
@@ -13,6 +12,8 @@ function newCheckConfig(filePath)
   end
 
   local getConfig = function ()
+  
+    readFile()
     -- Decode JSON to create the configuration object
     local obj, pos, err = json.decode (self.content, 1, nil)
     if err then
