@@ -2,7 +2,7 @@
 function newCheckLoad ()
   local self = {}
 
-  local getMetrics = function (io)
+  local getMetrics = function ()
     local file = assert(io.popen('hostname', 'r'))
     local hostname = file:read('*all')
     hostname = string.gsub(hostname, "\n","")

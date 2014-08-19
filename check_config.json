@@ -1,5 +1,5 @@
 {
-  "nagios_check_config": [
+  "check_config": [
     {
       "name": "check_disk",
       "args": [ "-w", "1", "-c", "1" ],

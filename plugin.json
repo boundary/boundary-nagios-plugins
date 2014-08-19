@@ -86,13 +86,6 @@
                       ["check_users","check_users"],
                       ["check_wave","check_wave"]]},
             "required": true
-        },
-        {
-            "title": "Arguments",
-            "name": "arguments",
-            "description": "Specific arguments to pass to the Nagios plugin",
-            "type": "string",
-            "required": false
         }
     ]
 }
