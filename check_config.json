@@ -1,0 +1,39 @@
+{
+  "nagios_check_config": [
+    {
+      "name": "check_disk",
+      "args": [ "-w", "1", "-c", "1" ],
+      "description": "",
+      "usage": "check_disk -w limit -c limit [-W limit] [-K limit] {-p path | -x device} [-C] [-E] [-e] [-f] [-g group ] [-k] [-l] [-M] [-m] [-R path ] [-r path ][-t timeout] [-u unit] [-v] [-X type] [-N type] [-n]"
+    },
+    {
+      "name": "check_dns",
+      "args": [ "-H $(hostname)" ],
+      "description": "",
+      "usage": "check_dns -H host [-s server] [-q type ] [-a expected-address] [-A] [-n] [-t timeout] [-w warn] [-c crit]"
+    },
+    {
+    	"name":"check_dhcp",
+    	"args": ["-m mac"],
+    	"description": "",
+    	"usage": "check_dhcp [-v] [-u] [-s serverip] [-r requestedip] [-t timeout][-i interface] [-m mac]"
+    },
+    {
+    	"name":"check_file_age",
+    	"args":"-f ",
+    	"description":"",
+    	"usage":"check_file_age [-w <secs>] [-c <secs>] [-W <size>] [-C <size>] [-i] -f <file>"
+    },
+    {
+      "name": "check_load",
+      "args": [ "-w", "1", "-c", "1" ],
+      "description": "",
+      "usage":"check_load [-r] -w WLOAD1,WLOAD5,WLOAD15 -c CLOAD1,CLOAD5,CLOAD15"
+    },
+    {
+      "name": "check_ssh",
+      "args": [ "localhost" ],
+      "description": ""
+    }
+  ]
+}
