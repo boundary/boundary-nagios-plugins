@@ -1,6 +1,6 @@
 json = require('dkjson')
 
-function newLoadConfiguration(filename)
+function newCheckConfig(filename)
   local self = {filename}
 
   local getConfig = function ()
@@ -22,5 +22,5 @@ function newLoadConfiguration(filename)
 end
 
 return {
-  newLoadConfiguration = newLoadConfiguration
+  newCheckConfig = newCheckConfig
 }
