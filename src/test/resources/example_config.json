@@ -1,0 +1,21 @@
+{
+  "check_config": [
+    {
+      "name": "check_disk",
+      "args": [ "-w", "1", "-c", "1" ],
+      "description": "Nagios check_disk",
+      "usage": "check_disk -w limit -c limit [-W limit] [-K limit] {-p path | -x device} [-C] [-E] [-e] [-f] [-g group ] [-k] [-l] [-M] [-m] [-R path ] [-r path ][-t timeout] [-u unit] [-v] [-X type] [-N type] [-n]"
+    },
+    {
+      "name": "check_load",
+      "args": [ "-w", "1", "-c", "1" ],
+      "description": "Nagios check_load",
+      "usage":"check_load [-r] -w WLOAD1,WLOAD5,WLOAD15 -c CLOAD1,CLOAD5,CLOAD15"
+    },
+    {
+      "name": "check_ssh",
+      "args": [ "localhost" ],
+      "description": "Nagios check_ssh"
+    }
+  ]
+}
