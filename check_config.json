@@ -19,6 +19,12 @@
     	"usage": "check_dhcp [-v] [-u] [-s serverip] [-r requestedip] [-t timeout][-i interface] [-m mac]"
     },
     {
+    	"name":"check_disk",
+    	"args":["-w","1","-c","1"],
+    	"description": "",
+    	"usage": "check_disk -w limit -c limit [-W limit] [-K limit] {-p path | -x device} [-C] [-E] [-e] [-f] [-g group ] [-k] [-l] [-M] [-m] [-R path ] [-r path ] [-t timeout] [-u unit] [-v] [-X type] [-N type] [-n]"
+    },
+    {
     	"name":"check_file_age",
     	"args":"-f ",
     	"description":"",
@@ -31,9 +37,27 @@
       "usage":"check_load [-r] -w WLOAD1,WLOAD5,WLOAD15 -c CLOAD1,CLOAD5,CLOAD15"
     },
     {
+      "name": "check_mailq",
+      "args": [ "-w", "1", "-c", "2" ],
+      "description": "",
+      "usage":"check_mailq -w <warn> -c <crit> [-W <warn>] [-C <crit>] [-M <MTA>] [-t <timeout>] [-v verbose]"
+    },
+    {
       "name": "check_ssh",
       "args": [ "localhost" ],
       "description": ""
+    },
+    {
+      "name": "check_swap",
+      "args": [ "-w","2000","-c","1000" ],
+      "description": "",
+      "usage": "check_swap [-av] -w <bytes_free> -c <bytes_free>"
+    },
+    {
+      "name": "check_users",
+      "args": [ "-w","1","-c","1" ],
+      "description": "",
+      "usage":"check_users -w <users> -c <users>"
     }
   ]
 }
