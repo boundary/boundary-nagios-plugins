@@ -19,10 +19,32 @@ function newNagiosPlugin()
     io.write("LOAD_15_MINUTE ",getRandomValue(0,20)," ",hostname,"\n")
 
   end
+  
+  function dumpCheckConfig(config)
+    for a,b in pairs(config)
+    do
+      for c,d in pairs(b)
+      do
+        print(d.name)
+        args = d.args
+        print(type(args))
+        for e,f in pairs(args)
+        do
+          print(e,f)
+        end
+        print(d.description)
+        print(d.usage)
+      end
+    end
+  end
 
   local function loadConfiguration()
     self.checkConfig = newJsonConfig("check_config.json")
-    
+    checkConfig = self.checkConfig.getConfig()
+    -- print(checkConfig.check_config[1].name)
+    -- self.paramConfig = newJsonConfig("param.json")
+    -- dumpCheckConfig(checkConfig.check_config)
+
   end
 
   local function run()

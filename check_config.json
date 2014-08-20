@@ -26,7 +26,7 @@
     },
     {
     	"name":"check_file_age",
-    	"args":"-f ",
+    	"args":["-f "],
     	"description":"",
     	"usage":"check_file_age [-w <secs>] [-c <secs>] [-W <size>] [-C <size>] [-i] -f <file>"
     },
