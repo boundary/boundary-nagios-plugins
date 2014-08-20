@@ -1,6 +1,6 @@
 
-function newExecProc(execPath,execArgs)
-  local self = {path=execPath,args=execArgs,output}
+function newExecProc(path,args)
+  local self = {path=path,args=args,output}
 
   function getCommand()
     local command = self.path
