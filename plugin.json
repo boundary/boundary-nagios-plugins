@@ -1,6 +1,7 @@
 {
     "description" : "Runs Nagios Plugins to fetch metrics from a host",
     "command" : "lua index.lua",
+    "postExtract" : "bash src/main/scripts/install.sh",
     "ignore" : "node_modules",
 
     "metrics" : [ "DISK_FREE_SPACE",
