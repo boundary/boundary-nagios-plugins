@@ -1,37 +1,57 @@
+-- Copyright 2014 Boundary,Inc.
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--    http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
 
-function newExecProc(path,args)
-  local self = {path=path,args=args,output}
+ExecProc = {path,args}
 
-  function getCommand()
-    local command = self.path
+function ExecProc:new()
+  o = {}
+  setmetatable(o, self)
+  self.__index = self
+  return o
+end
+
+
+function ExecProc:setPath(path)
+  self.path = path
+end
+
+function ExecProc:setArgs(args)
+  if type(args) ~= "table" then error("args is not a table type",2) end
+  self.args = args
+end
+
+function ExecProc:execute()
+  local command = self:getCommand()
+  local file = assert(io.popen(command, 'r'))
+  self.output = file:read('*all')
+  file:close()
+end
+
+function ExecProc:getCommand()
+  local command = self.path
+  if (self.args)
+  then
     for i,j in pairs(self.args)
     do
       command = command.." "..j
     end
     return command
   end
-  
--- TODO: How to handled exceptions??
-  local function execute()
-    local command = getCommand()
-    local file = assert(io.popen(command, 'r'))
-    self.output = file:read('*all')
-    file:close()
-  end
-  
-
-
-  local getOutput = function ()
-    return self.output
-  end
-
-  return {
-    execute = execute,
-    getOutput = getOutput,
-    getCommand = getCommand
-  }
 end
 
-return {
-  newExecProc = newExecProc
-}
+function ExecProc:getOutput()
+  return self.output
+end
+
+

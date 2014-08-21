@@ -51,11 +51,13 @@ first = nil
 function NagiosPlugin:addJob(config)
     local j = MetricJob:new()
     local m = Metric:new()
+    local e = ExecProc:new()
 --    print(config.plugin)
 --    print(config.pollInterval)
 --    print(config.pluginDirectory)
 
-    if (first == nil)
+
+    if (first == nil) 
     then
       j = MetricJob:new()
       j:setName("LOAD_1_MINUTE")

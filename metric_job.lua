@@ -12,6 +12,8 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
+require("exec_proc")
+
 MetricJob = {name,exec,hostname}
 
 function MetricJob:new()
@@ -27,10 +29,14 @@ function MetricJob:setExec(exec)
 end
 
 function MetricJob:getHost()
-  local file = assert(io.popen('hostname', 'r'))
-  local hostname = file:read('*all')
-  self.hostname = string.gsub(hostname, "\n","")
-  file:close()
+  local exec = ExecProc:new()
+  exec.setPath("hostname")
+  exec.execute()
+  self.hostname = string.gsub(exec.getOutput(),"\n","")
+--  local file = assert(io.popen('hostname', 'r'))
+--  local hostname = file:read('*all')
+--  self.hostname = string.gsub(hostname, "\n","")
+--  file:close()
 end
 
 function MetricJob:setName(name)
