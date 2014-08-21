@@ -12,6 +12,8 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
+require("utils")
+
 Metric = {source,name,interval,execProc}
 function Metric:new()
   local o = o or {}
@@ -56,8 +58,8 @@ end
 
 function Metric:update()
   self.execProc:execute()
-  local output = self.execProc:getOutput()
-  print("update")
+  local output = self.execProc:getOutput()  
+  io.write(self:getName()," ",getRandomValue(0,20)," ",getHostName(),"\n")
 end
 
 function Metric:toString()

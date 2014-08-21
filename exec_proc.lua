@@ -15,7 +15,7 @@
 ExecProc = {path,args}
 
 function ExecProc:new()
-  o = {}
+  local o = {}
   setmetatable(o, self)
   self.__index = self
   return o
@@ -32,7 +32,7 @@ function ExecProc:setArgs(args)
 end
 
 function ExecProc:execute()
-  if type(self.path) == nil then error("path has not been set",2) end
+  if self.path == nil then error("path has not been set",2) end
   local command = self:getCommand()
   local file = assert(io.popen(command, 'r'))
   self.output = file:read('*all')
