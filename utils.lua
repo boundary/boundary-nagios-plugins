@@ -12,26 +12,26 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-Dispatcher = {dispatchTable = {}}
+require("exec_proc")
 
-function Dispatcher:new()
-  local o = {}
-  setmetatable(o, self)
-  self.__index = self
-  return o
+math.randomseed(os.time())
+
+function getHostName()
+  local exec = ExecProc:new()
+  exec:setPath("hostname")
+  exec:execute()
+  local hostname = string.gsub(exec:getOutput(),"\n","")
+  return hostname
 end
 
-function Dispatcher:add(job)
-  table.insert(self.dispatchTable,job)
+function dumpTable(t)
+  print(t)
+	for i, j in pairs(t) do
+		print(i,j)
+	end
 end
 
-function Dispatcher:count()
-  return #self.dispatchTable
-end
+function getRandomValue(lower, upper)
 
-function Dispatcher:run()
-  first = nil
-  for i, job in pairs(self.dispatchTable) do
-    job:run()
-  end
+  return math.random(lower,upper)
 end
