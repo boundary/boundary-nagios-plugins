@@ -1,64 +1,61 @@
+-- Copyright 2014 Boundary,Inc.
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--    http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
 require("json_config")
+require("exec_proc")
+require("dispatcher")
 
-function newNagiosPlugin()
-  local self = {checkConfig, paramConfig}
+NagiosPlugin = {checkConfig, paramConfig, dispatcher=Dispatcher:new()}
 
-  function getRandomValue(lower, upper)
-    return math.random(lower,upper)
-  end
-
-  function testOutput()
-    local file = assert(io.popen('hostname', 'r'))
-    local hostname = file:read('*all')
-    hostname = string.gsub(hostname, "\n","")
-    file:close()
-    math.randomseed(os.time())
-
-    io.write("LOAD_1_MINUTE ",getRandomValue(0,20)," ",hostname,"\n")
-    io.write("LOAD_5_MINUTE ",getRandomValue(0,20)," ",hostname,"\n")
-    io.write("LOAD_15_MINUTE ",getRandomValue(0,20)," ",hostname,"\n")
-
-  end
-  
-  function dumpCheckConfig(config)
-    for a,b in pairs(config)
-    do
-      for c,d in pairs(b)
-      do
-        print(d.name)
-        args = d.args
-        print(type(args))
-        for e,f in pairs(args)
-        do
-          print(e,f)
-        end
-        print(d.description)
-        print(d.usage)
-      end
-    end
-  end
-
-  local function loadConfiguration()
-    self.checkConfig = newJsonConfig("check_config.json")
-    checkConfig = self.checkConfig.getConfig()
-    -- print(checkConfig.check_config[1].name)
-    -- self.paramConfig = newJsonConfig("param.json")
-    -- dumpCheckConfig(checkConfig.check_config)
-
-  end
-
-  local function run()
-    testOutput()
-  end
-
-
-  return {
-    run = run,
-    loadConfiguration = loadConfiguration
-  }
-
+function NagiosPlugin:new()
+  o = {}
+  setmetatable(o, self)
+  self.__index = self
+  return o
 end
 
-return {
-  newNagiosPlugin = newNagiosPlugin
-}
+function NagiosPlugin:getRandomValue(lower, upper)
+  return math.random(lower,upper)
+end
+
+function NagiosPlugin:testOutput()
+  local file = assert(io.popen('hostname', 'r'))
+  local hostname = file:read('*all')
+  hostname = string.gsub(hostname, "\n","")
+  file:close()
+  math.randomseed(os.time())
+
+  io.write("LOAD_1_MINUTE ",self:getRandomValue(0,20)," ",hostname,"\n")
+  io.write("LOAD_5_MINUTE ",self:getRandomValue(0,20)," ",hostname,"\n")
+  io.write("LOAD_15_MINUTE ",self:getRandomValue(0,20)," ",hostname,"\n")
+end
+
+function NagiosPlugin:loadConfiguration()
+  self.checkConfig = newJsonConfig("check_config.json").getConfig()
+  self.paramConfig = newJsonConfig("param.json").getConfig()
+  self:loadDispatcher()
+end
+
+function NagiosPlugin:loadDispatcher()
+--  for a,b in pairs(self.paramConfig.items)
+--  do
+--    print(a,b)
+--  end
+end
+
+function NagiosPlugin:run()
+  self:testOutput()
+  self.dispatcher:run()
+end
+
+

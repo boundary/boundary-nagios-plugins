@@ -1,0 +1,19 @@
+Dispatcher = {dispatchTable = {}}
+
+function Dispatcher:new()
+  o = {}
+  setmetatable(o, self)
+  self.__index = self
+  return o
+end
+
+function Dispatcher:add(job)
+  table.insert(self.dispatchTable,job)
+end
+
+function Dispatcher:count()
+  return #self.dispatchTable
+end
+
+function Dispatcher:run()
+end

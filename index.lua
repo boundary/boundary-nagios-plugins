@@ -1,15 +1,10 @@
 #!/usr/bin/env lua
 require("nagios_plugin")
 
-
-
 function Main()
-  plugin = newNagiosPlugin()
-  
-  plugin.loadConfiguration()
-  
-  plugin.run()
-
+  plugin = NagiosPlugin:new()
+  plugin:loadConfiguration()
+  plugin:run()
 end
 
 Main()
