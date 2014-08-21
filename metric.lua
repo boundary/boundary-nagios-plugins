@@ -14,7 +14,7 @@
 
 require("utils")
 
-Metric = {source,name,interval,execProc}
+Metric = {source,name,interval,exec}
 function Metric:new()
   local o = o or {}
   setmetatable(o, self)
@@ -22,8 +22,8 @@ function Metric:new()
   return o
 end
 
-function Metric:setExec(execProc)
-  self.execProc = execProc
+function Metric:setExec(exec)
+  self.exec = exec
 end
 
 function Metric:getName()
@@ -57,9 +57,13 @@ function Metric:getSource()
 end
 
 function Metric:update()
-  self.execProc:execute()
-  local output = self.execProc:getOutput()  
-  io.write(self:getName()," ",getRandomValue(0,20)," ",getHostName(),"\n")
+  self.exec:execute()
+  local output = self.exec:getOutput() 
+  self:send(self:getName()," ",getRandomValue(0,20)," ",getHostName(),"\n")
+end
+
+function Metric:send(metric,source,value)
+  io.write(metric," ",value," ",source,"\n")
 end
 
 function Metric:toString()
