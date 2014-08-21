@@ -1,7 +1,7 @@
 require("metric")
 local LuaUnit = require('luaunit')
 
-TestMetric = {} --class
+local TestMetric = {} --class
 function TestMetric:testName()
   m = Metric:new()
   m:setName("foo")
@@ -10,8 +10,8 @@ end
 
 function TestMetric:testNameType()
   local ok, msg = pcall(function ()
-    m = Metric:new()
-    n = 30
+    local m = Metric:new()
+    local n = 30
     m:setName(n)
   end)
 
@@ -24,13 +24,34 @@ end
 
 function TestMetric:testIntervalType()
   local ok, msg = pcall(function ()
-    m = Metric:new()
-    s = "30"
+    local m = Metric:new()
+    local s = "30"
     m:setInterval(s)
   end)
 
   assertEquals(ok,false)
 end
+
+function TestMetric:testSource()
+ local ok, msg = pcall(function ()
+    local m = Metric:new()
+    local s = "localhost"
+    m:setSource(s)
+  end)
+
+  assertEquals(ok,false)
+end
+
+function TestMetric:testSourceType()
+  local ok, msg = pcall(function ()
+    local m = Metric:new()
+    local n = 30
+    m:setSource(n)
+  end)
+
+  assertEquals(ok,false)
+end
+
 
 
 function TestMetric:testToString()
