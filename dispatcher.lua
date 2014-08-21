@@ -1,7 +1,7 @@
 Dispatcher = {dispatchTable = {}}
 
 function Dispatcher:new()
-  o = {}
+  local o = {}
   setmetatable(o, self)
   self.__index = self
   return o

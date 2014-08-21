@@ -14,7 +14,7 @@
 
 Metric = {source,name,interval,execProc}
 function Metric:new()
-  o = o or {}
+  local o = o or {}
   setmetatable(o, self)
   self.__index = self
   return o
@@ -48,10 +48,16 @@ function Metric:setSource(source)
 end
 
 function Metric:getSource()
+  local source
+
+
   return self.source
 end
 
-function Metric:sample()
+function Metric:update()
+  self.execProc:execute()
+  local output = self.execProc:getOutput()
+  print("update")
 end
 
 function Metric:toString()

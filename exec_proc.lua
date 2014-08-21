@@ -40,6 +40,7 @@ function ExecProc:execute()
 end
 
 function ExecProc:getCommand()
+  if type(self.path) == nil then error("path has not been set",2) end
   local command = self.path
   if (self.args)
   then

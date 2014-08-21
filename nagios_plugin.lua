@@ -20,7 +20,7 @@ require("metric")
 NagiosPlugin = {checkConfig, paramConfig, dispatcher=Dispatcher:new()}
 
 function NagiosPlugin:new()
-  o = {}
+  local o = {}
   setmetatable(o, self)
   self.__index = self
   return o

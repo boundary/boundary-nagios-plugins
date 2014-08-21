@@ -66,6 +66,12 @@ function TestMetric:testSourceType()
   assertEquals(ok,false)
 end
 
+function TestMetric:testUpdate()
+  m = Metric:new()
+  e = ExecProc:new()
+  
+  m.setExec(e)
+  m.sample()
 
 
 function TestMetric:testToString()

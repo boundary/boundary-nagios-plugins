@@ -13,25 +13,33 @@
 -- limitations under the License.
 
 require("metric_job")
+require("metric")
+require("utils")
+
 local LuaUnit = require("luaunit")
 
 TestMetricJob = {}
 
 function TestMetricJob:testConstructor()
+  local m = Metric:new()
   local j = MetricJob:new()
   assertEquals(j ~= nil,true)
 end
 
-function TestMetricJob:testSample()
+function TestMetricJob:testRun()
   local j = MetricJob:new()
-  j:getHost()
-  j:setName("LOAD_1_MINUTE")
-  j:sample()
-  assertEquals(1,1)
+  assertEquals(j ~= nil,true)
 end
 
-function TestMetricJob:testHost()
-
+function TestMetricJob:testUpdate()
+  local j = MetricJob:new()
+  local m = Metric:new()
+  local e = ExecProc:new()
+  e:setPath("echo")
+  m:setExec(e)
+  j:setMetric(m)
+  j:run()
+  assertEquals(1,1)
 end
 
 LuaUnit:run()

@@ -13,46 +13,32 @@
 -- limitations under the License.
 
 require("exec_proc")
+require("utils")
 
-MetricJob = {name,exec,hostname}
+MetricJob = {name,metric}
 
 function MetricJob:new()
-  o = {}
+  local o = {}
   setmetatable(o, self)
   self.__index = self
   return o
 end
 
-
-function MetricJob:setExec(exec)
-  self.exec = exec
-end
-
-function MetricJob:getHost()
-  local exec = ExecProc:new()
-  exec.setPath("hostname")
-  exec.execute()
-  self.hostname = string.gsub(exec.getOutput(),"\n","")
---  local file = assert(io.popen('hostname', 'r'))
---  local hostname = file:read('*all')
---  self.hostname = string.gsub(hostname, "\n","")
---  file:close()
+function MetricJob:setMetric(metric)
+--  if type(metric) ~= 'table' then error("Metric is not a table") end
+  self.metric = metric
 end
 
 function MetricJob:setName(name)
   self.name = name
 end
 
-function MetricJob:sample()
---  if self.exec == nil then error("exec not specified",2) end
---  self.exec.execute()
---  output = self.exec.getOutput()
-  math.randomseed(os.time())
-  self:getHost()
-
-  io.write(self.name," ",math.random(0,20)," ",self.hostname,"\n")
+function MetricJob:run()
+  if self.metric == nil
+  then
+    print("No metric assigned to the job",skipping)
+  else
+    self.metric:update()
+  end
 end
 
-function MetricJob:parse()
-  return ""
-end
