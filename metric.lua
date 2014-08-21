@@ -12,12 +12,16 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-Metric = {source,name,interval}
+Metric = {source,name,interval,execProc}
 function Metric:new()
   o = o or {}
   setmetatable(o, self)
   self.__index = self
   return o
+end
+
+function Metric:setExec(execProc)
+  self.execProc = execProc
 end
 
 function Metric:getName()
@@ -45,6 +49,9 @@ end
 
 function Metric:getSource()
   return self.source
+end
+
+function Metric:sample()
 end
 
 function Metric:toString()

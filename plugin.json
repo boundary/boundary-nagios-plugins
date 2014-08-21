@@ -10,8 +10,17 @@
                   "LOAD_5_MINUTE",
                   "LOAD_15_MINUTE"],
 
-    "paramArray" : { "itemTitle" : ["plugin"], "schemaTitle" : "Check"},
+    "paramArray" : { "itemTitle" : ["name"], "schemaTitle" : "Check"},
     "paramSchema" : [
+        {
+            "title" : "Name",
+            "name" : "name",
+            "description" : "Name of this metric configuration",
+            "type" : "string",
+            "default" : "",
+            "required" : true
+        },
+    
         {
             "title" : "Poll Time (sec)",
             "name" : "pollInterval",

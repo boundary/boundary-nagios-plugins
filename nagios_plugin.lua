@@ -15,6 +15,7 @@ require("json_config")
 require("exec_proc")
 require("dispatcher")
 require("metric_job")
+require("metric")
 
 NagiosPlugin = {checkConfig, paramConfig, dispatcher=Dispatcher:new()}
 
@@ -46,11 +47,14 @@ function NagiosPlugin:loadConfiguration()
   self.paramConfig = newJsonConfig("param.json").getConfig()
   self:loadDispatcher()
 end
+first = nil
+function NagiosPlugin:addJob(config)
+    local j = MetricJob:new()
+    local m = Metric:new()
+--    print(config.plugin)
+--    print(config.pollInterval)
+--    print(config.pluginDirectory)
 
-function NagiosPlugin:loadDispatcher()
-  first = nil
-  for a,b in pairs(self.paramConfig.items)
-  do
     if (first == nil)
     then
       j = MetricJob:new()
@@ -64,6 +68,14 @@ function NagiosPlugin:loadDispatcher()
       self.dispatcher:add(j)
       first = 1
     end
+
+end
+
+function NagiosPlugin:loadDispatcher()
+  first = nil
+  for a,b in pairs(self.paramConfig.items)
+  do
+    self:addJob(b)
   end
 end
 
