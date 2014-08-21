@@ -4,11 +4,6 @@
          "pollInterval": "15",
          "pluginDirectory": "/usr/local/nagios/exec",
          "plugin": "check_load"
-      },
-      {
-         "pollInterval": "30",
-         "pluginDirectory": "/usr/local/nagios/libexec",
-         "plugin": "check_ssh"
       }
    ],
    "pollInterval": 1000

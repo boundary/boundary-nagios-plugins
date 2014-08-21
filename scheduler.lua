@@ -12,15 +12,15 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-Schedule = {}
+Scheduler = {}
 
-function Schedule:new()
+function Scheduler:new()
   local o = o or {}
   setmetatable(o, self)
   self.__index = self
   return o
 end
 
-function Schedule:method(arg)
+function Scheduler:method(arg)
 
 end

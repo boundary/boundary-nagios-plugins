@@ -17,7 +17,7 @@ require("nagios_plugin")
 
 function Main()
   plugin = NagiosPlugin:new()
-  plugin:loadConfiguration()
+  plugin:initialize()
   plugin:run()
 end
 

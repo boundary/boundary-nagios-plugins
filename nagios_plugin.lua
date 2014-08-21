@@ -12,72 +12,28 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-require("json_config")
-require("exec_proc")
-require("dispatcher")
-require("metric_job")
-require("metric")
+require("plugin_config")
+require("scheduler")
 
-NagiosPlugin = {checkConfig, paramConfig, dispatcher=Dispatcher:new()}
+NagiosPlugin = {config,dispatcher,scheduler}
 
 function NagiosPlugin:new()
   local o = {}
   setmetatable(o, self)
   self.__index = self
+  self.dispatcher = Dispatcher:new()
+  self.scheduler = Scheduler:new()
+  self.config = PluginConfig:new()
+  self.config:setDispatcher(self.dispatcher)
+  self.config:setScheduler(self.scheduler)
   return o
 end
 
-function NagiosPlugin:loadConfiguration()
-  self.checkConfig = newJsonConfig("check_config.json").getConfig()
-  self.paramConfig = newJsonConfig("param.json").getConfig()
-  self:loadDispatcher()
-end
-first = nil
-function NagiosPlugin:addJob(config)
-
-  if (first == nil)
-  then
-    local e = ExecProc:new()
-    local j = MetricJob:new()
-    local m = Metric:new()
-    e:setPath("ls")
-    m:setName("LOAD_1_MINUTE")
-    m:setExec(e)
-    j:setMetric(m)
-    self.dispatcher:add(j)
-
-    e = ExecProc:new()
-    j = MetricJob:new()
-    m = Metric:new()
-    e:setPath("ls")
-    m:setName("LOAD_5_MINUTE")
-    m:setExec(e)
-    j:setMetric(m)
-    self.dispatcher:add(j)
-
-    e = ExecProc:new()
-    j = MetricJob:new()
-    m = Metric:new()
-    e:setPath("ls")
-    m:setName("LOAD_15_MINUTE")
-    m:setExec(e)
-    j:setMetric(m)
-    self.dispatcher:add(j)
-
-    first = 1
-  end
-end
-
-function NagiosPlugin:loadDispatcher()
-  first = nil
-  for a,b in pairs(self.paramConfig.items)
-  do
-    self:addJob(b)
-  end
+function NagiosPlugin:initialize()
+  self.config:load()
 end
 
 function NagiosPlugin:run()
-  -- self:testOutput()
   self.dispatcher:run()
 end
 
