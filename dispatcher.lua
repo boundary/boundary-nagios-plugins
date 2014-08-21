@@ -18,6 +18,6 @@ end
 function Dispatcher:run()
   first = nil
   for i, job in pairs(self.dispatchTable) do
-    job:sample()
+    job:run()
   end
 end
