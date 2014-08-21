@@ -21,8 +21,8 @@ function ExecProc:new()
   return o
 end
 
-
 function ExecProc:setPath(path)
+  if type(path) ~= "string" then error("path is not a string type",2) end
   self.path = path
 end
 
@@ -32,6 +32,7 @@ function ExecProc:setArgs(args)
 end
 
 function ExecProc:execute()
+  if type(self.path) == nil then error("path has not been set",2) end
   local command = self:getCommand()
   local file = assert(io.popen(command, 'r'))
   self.output = file:read('*all')
@@ -46,8 +47,8 @@ function ExecProc:getCommand()
     do
       command = command.." "..j
     end
-    return command
   end
+  return command
 end
 
 function ExecProc:getOutput()

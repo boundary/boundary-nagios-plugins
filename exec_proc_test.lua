@@ -40,4 +40,11 @@ function TestExecProc:testGetOutput()
   assertEquals(output,expectedOutput)
 end
 
+function TestExecProc:testNoArgs()
+  local exec = ExecProc:new()
+  exec:setPath("echo foo")
+  exec:execute()
+  assertEquals(exec:getOutput(),"foo\n")
+end
+
 LuaUnit:run()
