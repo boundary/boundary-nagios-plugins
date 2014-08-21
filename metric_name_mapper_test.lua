@@ -15,14 +15,14 @@
 require("metric_name_mapper")
 local LuaUnit = require("luaunit")
 
-MetricNameMapperTest = {}
+TestMetricNameMapper = {}
 
-function MetricNameMapperTest:testConstructor()
+function TestMetricNameMapper:testConstructor()
   local j = MetricNameMapper:new()
   assertEquals(j ~= nil,true)
 end
 
-function MetricNameMapperTest:testX()
+function TestMetricNameMapper:testX()
   local j = MetricNameMapper:new()
 end
 

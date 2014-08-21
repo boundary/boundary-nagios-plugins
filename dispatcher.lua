@@ -16,4 +16,8 @@ function Dispatcher:count()
 end
 
 function Dispatcher:run()
+  first = nil
+  for i, job in pairs(self.dispatchTable) do
+    job:sample()
+  end
 end

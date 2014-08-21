@@ -12,7 +12,7 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-MetricJob = {exec}
+MetricJob = {name,exec,hostname}
 
 function MetricJob:new()
   o = {}
@@ -26,9 +26,27 @@ function MetricJob:setExec(exec)
   self.exec = exec
 end
 
+function MetricJob:getHost()
+  local file = assert(io.popen('hostname', 'r'))
+  local hostname = file:read('*all')
+  self.hostname = string.gsub(hostname, "\n","")
+  file:close()
+end
+
+function MetricJob:setName(name)
+  self.name = name
+end
+
 function MetricJob:sample()
-  if self.exec == nil then error("exec not specified",2) end
-  self.exec.execute()
-  output = self.exec.getOutput()
-  
+--  if self.exec == nil then error("exec not specified",2) end
+--  self.exec.execute()
+--  output = self.exec.getOutput()
+  math.randomseed(os.time())
+  self:getHost()
+
+  io.write(self.name," ",math.random(0,20)," ",self.hostname,"\n")
+end
+
+function MetricJob:parse()
+  return ""
 end

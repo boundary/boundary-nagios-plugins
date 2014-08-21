@@ -15,15 +15,23 @@
 require("metric_job")
 local LuaUnit = require("luaunit")
 
-MetricJobTest = {}
+TestMetricJob = {}
 
-function MetricJobTest:testConstructor()
+function TestMetricJob:testConstructor()
   local j = MetricJob:new()
   assertEquals(j ~= nil,true)
 end
 
-function MetricJobTest:testSample()
-  local j = Metric:new()
+function TestMetricJob:testSample()
+  local j = MetricJob:new()
+  j:getHost()
+  j:setName("LOAD_1_MINUTE")
+  j:sample()
+  assertEquals(1,1)
+end
+
+function TestMetricJob:testHost()
+
 end
 
 LuaUnit:run()
