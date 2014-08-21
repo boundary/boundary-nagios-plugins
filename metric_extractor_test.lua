@@ -12,19 +12,21 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-require("metric")
+require("metric_extractor")
+
 local LuaUnit = require('luaunit')
 
-local TestMetric = {} --class
-function TestMetric:testName()
-  m = Metric:new()
+TestMetricExtractor = {}
+
+function TestMetricExtractor:testName()
+  m = MetricExtractor:new()
   m:setName("foo")
   assertEquals(m:getName(),"foo")
 end
 
-function TestMetric:testNameType()
+function TestMetricExtractor:testNameType()
   local ok, msg = pcall(function ()
-    local m = Metric:new()
+    local m = MetricExtractor:new()
     local n = 30
     m:setName(n)
   end)
@@ -32,13 +34,13 @@ function TestMetric:testNameType()
   assertEquals(ok,false)
 end
 
-function TestMetric:testInterval()
+function TestMetricExtractor:testInterval()
   assertEquals(1,1)
 end
 
-function TestMetric:testIntervalType()
+function TestMetricExtractor:testIntervalType()
   local ok, msg = pcall(function ()
-    local m = Metric:new()
+    local m = MetricExtractor:new()
     local s = "30"
     m:setInterval(s)
   end)
@@ -46,19 +48,19 @@ function TestMetric:testIntervalType()
   assertEquals(ok,false)
 end
 
-function TestMetric:testSource()
- local ok, msg = pcall(function ()
-    local m = Metric:new()
-    local s = "localhost"
+function TestMetricExtractor:testSource()
+  local ok, msg = pcall(function ()
+    local m = MetricExtractor:new()
+    local s = 10
     m:setSource(s)
   end)
 
   assertEquals(ok,false)
 end
 
-function TestMetric:testSourceType()
+function TestMetricExtractor:testSourceType()
   local ok, msg = pcall(function ()
-    local m = Metric:new()
+    local m = MetricExtractor:new()
     local n = 30
     m:setSource(n)
   end)
@@ -66,16 +68,17 @@ function TestMetric:testSourceType()
   assertEquals(ok,false)
 end
 
-function TestMetric:testUpdate()
-  m = Metric:new()
+function TestMetricExtractor:testUpdate()
+  m = MetricExtractor:new()
   e = ExecProc:new()
-  
-  m.setExec(e)
-  m.sample()
+  m:setName("foo")
+  e:setPath("ls")
+  m:setExec(e)
+  m:update()
+end
 
-
-function TestMetric:testToString()
-  m = Metric:new()
+function TestMetricExtractor:testToString()
+  m = MetricExtractor:new()
   m:setName("foo")
   m:setInterval(30)
   assertEquals(m:toString(),"[name = foo, interval = 30]")

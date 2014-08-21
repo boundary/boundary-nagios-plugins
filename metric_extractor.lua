@@ -14,58 +14,58 @@
 
 require("utils")
 
-Metric = {source,name,interval,exec}
-function Metric:new()
+MetricExtractor = {source,name,interval,exec}
+function MetricExtractor:new()
   local o = o or {}
   setmetatable(o, self)
   self.__index = self
   return o
 end
 
-function Metric:setExec(exec)
+function MetricExtractor:setExec(exec)
   self.exec = exec
 end
 
-function Metric:getName()
+function MetricExtractor:getName()
   return self.name
 end
 
-function Metric:setName(name)
+function MetricExtractor:setName(name)
   if type(name) ~= "string" then error("interval is not a string type",2) end
   self.name = name
 end
 
-function Metric:setInterval(interval)
+function MetricExtractor:setInterval(interval)
   if type(interval) ~= "number" then error("interval is not a number type",2) end
   self.interval = interval
 end
 
-function Metric:getInterval()
+function MetricExtractor:getInterval()
   return self.interval
 end
 
-function Metric:setSource(source)
+function MetricExtractor:setSource(source)
   if type(source) ~= "string" then error("source is not a string type",2) end
   self.source = source
 end
 
-function Metric:getSource()
+function MetricExtractor:getSource()
   local source
 
 
   return self.source
 end
 
-function Metric:update()
+function MetricExtractor:update()
   self.exec:execute()
   local output = self.exec:getOutput() 
   self:send(self:getName()," ",getRandomValue(0,20)," ",getHostName(),"\n")
 end
 
-function Metric:send(metric,source,value)
+function MetricExtractor:send(metric,source,value)
   io.write(metric," ",value," ",source,"\n")
 end
 
-function Metric:toString()
+function MetricExtractor:toString()
   return "[name = "..self.name..", interval = "..self.interval.."]"
 end
