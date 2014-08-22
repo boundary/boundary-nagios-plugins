@@ -49,5 +49,5 @@ function Metric:getValue()
 end
 
 function Metric:toString()
-  return self.source
+  return self.source.." "..self.name.." "..self.value
 end

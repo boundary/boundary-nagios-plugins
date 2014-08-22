@@ -41,8 +41,15 @@ function TestMetric:testName()
 end
 
 function TestMetric:testValue()
-  self.m:setValue("snafu")
-  assertEquals(self.m:getValue(),"snafu")
+  self.m:setValue(10)
+  assertEquals(self.m:getValue(),10)
+end
+
+function TestMetric:testToString()
+  self.m:setSource("foo")
+  self.m:setName("bar")
+  self.m:setValue(10)
+  assertEquals(self.m:toString(),"foo bar 10")
 end
 
 LuaUnit:run()
