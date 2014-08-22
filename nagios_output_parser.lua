@@ -12,7 +12,7 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-NagiosOutputParser = {}
+NagiosOutputParser = {mapper}
 
 function NagiosOutputParser:new()
   local o = o or {}
@@ -21,6 +21,20 @@ function NagiosOutputParser:new()
   return o
 end
 
-function NagiosOutputParser:method(arg)
+function NagiosOutputParser:setMapper(mapper)
+  self.mapper = mapper
+end
 
+function NagiosOutputParser:parse(output)
+  local t = split(output,"|")
+  local v = split(t[2]," ")
+  for i, j in pairs(v) do
+    words = split(j,"=")
+    values = split(words[2],";")
+  	m = Metric:new()
+  	m:setName(words[1])
+  	m:setValue(values[1])
+  	print(m:toString())
+  end
+  return v
 end

@@ -13,11 +13,23 @@
 -- limitations under the License.
 
 require("nagios_output_parser")
+require("metric_name_mapper")
+require("metric")
 require("utils")
 
 local LuaUnit = require("luaunit")
 
 TestNagiosOutputParser = {}
+
+function TestNagiosOutputParser:setUp()
+  self.p = NagiosOutputParser:new()
+  self.m = MetricNameMapper:new()
+
+end
+
+function TestNagiosOutputParser:tearDown()
+  self.m = nil
+end
 
 function TestNagiosOutputParser:testConstructor()
   local o = NagiosOutputParser:new()
@@ -25,13 +37,24 @@ function TestNagiosOutputParser:testConstructor()
 end
 
 function TestNagiosOutputParser:testCheckLoad()
-  local o = NagiosOutputParser:new()
+  self.m:add("load1","LOAD_1_MINUTE")
+  self.m:add("load5","LOAD_5_MINUTE")
+  self.m:add("load15","LOAD_15_MINUTE")
+
+  self.p:setMapper(self.m)
+
   local s = "CRITICAL - load average: 1.91, 0.00, 0.00|load1=1.910;0.000;0.000;0; load5=0.000;0.000;0.000;0; load15=0.000;0.000;0.000;0;"
-  local t = split(s,"|")
-  dumpTable(t)
-  local v = split(t[2]," ")
-  dumpTable(v)
-  -- local values = o.parse()
+  local values = self.p:parse(s)
+  -- dumpTable(values)
+end
+
+function TestNagiosOutputParser:testCheckUsers()
+  self.m:add("users")
+  self.p:setMapper(self.m)
+  local s = "USERS CRITICAL - 5 users currently logged in |users=5;1;1;0"
+  local values = self.p:parse(s)
+  -- dumpTable(values)
+
 end
 
 LuaUnit:run()
