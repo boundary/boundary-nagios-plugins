@@ -30,11 +30,11 @@
 						<configuration>
 							<executable>curl </executable>
 							<arguments>
-								<argument>https://api.graphdat.com/v1/plugins/private/${project.name}/boundary/${project.artifactId}</argument>
 								<argument>-X</argument>
 								<argument>PUT</argument>
 								<argument>-u</argument>
 								<argument>${boundary-metrics-user}:${boundary-metrics-password}</argument>
+								<argument>https://api.graphdat.com/v1/plugins/private/${project.name}/boundary/${project.artifactId}</argument>
 							</arguments>
 						</configuration>
 					</execution>
