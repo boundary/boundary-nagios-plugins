@@ -12,15 +12,21 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-MetricNameMapper = {}
+MetricNameMapper = {t}
 
 function MetricNameMapper:new()
   local o = {}
   setmetatable(o, self)
   self.__index = self
+  self.t = {}
   return o
 end
 
-function MetricNameMapper:load()
+function MetricNameMapper:add(from,to)
+  self.t[from] = to
+end
+
+function MetricNameMapper:map(from)
+  return self.t[from]
 end
 

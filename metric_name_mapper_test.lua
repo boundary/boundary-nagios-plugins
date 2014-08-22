@@ -18,12 +18,18 @@ local LuaUnit = require("luaunit")
 TestMetricNameMapper = {}
 
 function TestMetricNameMapper:testConstructor()
-  local j = MetricNameMapper:new()
-  assertEquals(j ~= nil,true)
+  local o = MetricNameMapper:new()
+  assertEquals(o ~= nil,true)
 end
 
 function TestMetricNameMapper:testX()
-  local j = MetricNameMapper:new()
+  local o = MetricNameMapper:new()
+  o:add("load1","LOAD_1_MINUTE")
+  o:add("load5","LOAD_5_MINUTE")
+  o:add("load15","LOAD_15_MINUTE")
+  assertEquals(o:map("load1"),"LOAD_1_MINUTE")
+  assertEquals(o:map("load5"),"LOAD_5_MINUTE")
+  assertEquals(o:map("load15"),"LOAD_15_MINUTE")
 end
 
 LuaUnit:run()
